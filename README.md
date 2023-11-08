@@ -1,4 +1,4 @@
-﻿## .NET 7 - Web API
+﻿## **.NET 7 - Web API**
 #### Entity Framework Core - Code First Approach
 #### Swagger - API Documentation
 #### CRUD Operations
