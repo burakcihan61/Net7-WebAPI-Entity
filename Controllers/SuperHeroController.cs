@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Net7_WebAPI_Entity.Models;
+using Net7_WebAPI_Entity.Services.SuperHeroService;
 
 namespace Net7_WebAPI_Entity.Controllers
 {
@@ -12,45 +13,18 @@ namespace Net7_WebAPI_Entity.Controllers
     [ApiController]
     public class SuperHeroController : ControllerBase
     {
-        private static List<SuperHero> superHeroes = new List<SuperHero>
+        private readonly ISuperHeroService _superHeroService;
+        public SuperHeroController(ISuperHeroService superHeroService)
         {
-            new SuperHero
-            {
-                Id = 1,
-                Name = "Batman",
-                LastName = "Wayne",
-                SecretIdentity = "Bruce Wayne",
-                PlaceOfBirth = "Gotham City",
-                Occupation = "CEO of Wayne Enterprises",
-                PlaceOfResidence = "Gotham City"
-            },
-            new SuperHero
-            {
-                Id = 2,
-                Name = "Superman",
-                LastName = "Kent",
-                SecretIdentity = "Clark Kent",
-                PlaceOfBirth = "Krypton",
-                Occupation = "Reporter",
-                PlaceOfResidence = "Metropolis"
-            },
-            new SuperHero
-            {
-                Id = 3,
-                Name = "Iron Man",
-                LastName = "Stark",
-                SecretIdentity = "Tony Stark",
-                PlaceOfBirth = "Long Island",
-                Occupation = "CEO of Stark Industries",
-                PlaceOfResidence = "New York City"
-            }
-        };
+            _superHeroService = superHeroService;
+        }
         // GET: api/SuperHero
         [HttpGet]
         public async Task<ActionResult<List<SuperHero>>> GetAllHeroes()
         {
             
-            return Ok(superHeroes);
+            var result = _superHeroService.GetAllHeroes();
+            return Ok(result);
 
         }
         // GET: api/SuperHero/{id}
@@ -58,48 +32,42 @@ namespace Net7_WebAPI_Entity.Controllers
         public async Task<ActionResult<SuperHero>> GetHeroById(int id)
         {
            
-            var hero = superHeroes.Find(x => x.Id == id);
-            if (hero == null)
+            var result = _superHeroService.GetHeroById(id);
+            if (result is null)
             {
                 return NotFound("Hero not found");
             }
-            return Ok(hero);
+            return Ok(result);
         }
         // POST: api/SuperHero
         [HttpPost]
         public async Task<ActionResult<List<SuperHero>>> AddHero(SuperHero hero)
         {
-            superHeroes.Add(hero);
-            return Ok(superHeroes);
+            var result = _superHeroService.AddHero(hero);
+            return Ok(result);
         }
         // PUT: api/SuperHero/{id}
         [HttpPut("{id}")]
         public async Task<ActionResult<List<SuperHero>>> UpdateHero(int id, SuperHero hero)
         {
-            var heroToUpdate = superHeroes.Find(x => x.Id == id);
-            if (heroToUpdate == null)
+            var result = _superHeroService.UpdateHero(id, hero);
+            if (result is null)
             {
                 return NotFound("Hero not found");
             }
-            heroToUpdate.Name = hero.Name;
-            heroToUpdate.LastName = hero.LastName;
-            heroToUpdate.SecretIdentity = hero.SecretIdentity;
-            heroToUpdate.PlaceOfBirth = hero.PlaceOfBirth;
-            heroToUpdate.Occupation = hero.Occupation;
-            heroToUpdate.PlaceOfResidence = hero.PlaceOfResidence;
-            return Ok(superHeroes);
+            return Ok(result);
         }
         // DELETE: api/SuperHero/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<SuperHero>>> DeleteHero(int id)
         {
-            var heroToDelete = superHeroes.Find(x => x.Id == id);
-            if (heroToDelete == null)
-            {
+           var result = _superHeroService.DeleteHero(id);
+              if (result is null)
+              {
                 return NotFound("Hero not found");
-            }
-            superHeroes.Remove(heroToDelete);
-            return Ok(superHeroes);
+              }
+
+              return Ok(result);
         }
     }
 }
