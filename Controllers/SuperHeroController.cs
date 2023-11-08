@@ -74,7 +74,7 @@ namespace Net7_WebAPI_Entity.Controllers
         }
         // PUT: api/SuperHero/{id}
         [HttpPut("{id}")]
-        public async Task<ActionResult<SuperHero>> UpdateHero(int id, SuperHero hero)
+        public async Task<ActionResult<List<SuperHero>>> UpdateHero(int id, SuperHero hero)
         {
             var heroToUpdate = superHeroes.Find(x => x.Id == id);
             if (heroToUpdate == null)
@@ -91,7 +91,7 @@ namespace Net7_WebAPI_Entity.Controllers
         }
         // DELETE: api/SuperHero/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult<SuperHero>> DeleteHero(int id)
+        public async Task<ActionResult<List<SuperHero>>> DeleteHero(int id)
         {
             var heroToDelete = superHeroes.Find(x => x.Id == id);
             if (heroToDelete == null)
