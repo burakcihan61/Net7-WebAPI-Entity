@@ -55,7 +55,7 @@ namespace Net7_WebAPI_Entity.Controllers
         }
         // GET: api/SuperHero/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<SuperHero>>> GetHeroById(int id)
+        public async Task<ActionResult<SuperHero>> GetHeroById(int id)
         {
            
             var hero = superHeroes.Find(x => x.Id == id);
@@ -65,7 +65,41 @@ namespace Net7_WebAPI_Entity.Controllers
             }
             return Ok(hero);
         }
-        
-        
+        // POST: api/SuperHero
+        [HttpPost]
+        public async Task<ActionResult<List<SuperHero>>> AddHero(SuperHero hero)
+        {
+            superHeroes.Add(hero);
+            return Ok(superHeroes);
+        }
+        // PUT: api/SuperHero/{id}
+        [HttpPut("{id}")]
+        public async Task<ActionResult<SuperHero>> UpdateHero(int id, SuperHero hero)
+        {
+            var heroToUpdate = superHeroes.Find(x => x.Id == id);
+            if (heroToUpdate == null)
+            {
+                return NotFound("Hero not found");
+            }
+            heroToUpdate.Name = hero.Name;
+            heroToUpdate.LastName = hero.LastName;
+            heroToUpdate.SecretIdentity = hero.SecretIdentity;
+            heroToUpdate.PlaceOfBirth = hero.PlaceOfBirth;
+            heroToUpdate.Occupation = hero.Occupation;
+            heroToUpdate.PlaceOfResidence = hero.PlaceOfResidence;
+            return Ok(superHeroes);
+        }
+        // DELETE: api/SuperHero/{id}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<SuperHero>> DeleteHero(int id)
+        {
+            var heroToDelete = superHeroes.Find(x => x.Id == id);
+            if (heroToDelete == null)
+            {
+                return NotFound("Hero not found");
+            }
+            superHeroes.Remove(heroToDelete);
+            return Ok(superHeroes);
+        }
     }
 }
