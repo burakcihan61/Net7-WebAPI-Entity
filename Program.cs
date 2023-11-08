@@ -1,4 +1,5 @@
 global using Net7_WebAPI_Entity.Models;
+global using Net7_WebAPI_Entity.Data;
 using Net7_WebAPI_Entity.Services.SuperHeroService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ISuperHeroService, SuperHeroService>();
+builder.Services.AddDbContext<DataContext>();
 
 var app = builder.Build();
 

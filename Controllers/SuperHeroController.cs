@@ -23,7 +23,7 @@ namespace Net7_WebAPI_Entity.Controllers
         public async Task<ActionResult<List<SuperHero>>> GetAllHeroes()
         {
             
-            var result = _superHeroService.GetAllHeroes();
+            var result = await _superHeroService.GetAllHeroes();
             return Ok(result);
 
         }
@@ -32,7 +32,7 @@ namespace Net7_WebAPI_Entity.Controllers
         public async Task<ActionResult<SuperHero>> GetHeroById(int id)
         {
            
-            var result = _superHeroService.GetHeroById(id);
+            var result = await _superHeroService.GetHeroById(id);
             if (result is null)
             {
                 return NotFound("Hero not found");
@@ -43,14 +43,14 @@ namespace Net7_WebAPI_Entity.Controllers
         [HttpPost]
         public async Task<ActionResult<List<SuperHero>>> AddHero(SuperHero hero)
         {
-            var result = _superHeroService.AddHero(hero);
+            var result = await _superHeroService.AddHero(hero);
             return Ok(result);
         }
         // PUT: api/SuperHero/{id}
         [HttpPut("{id}")]
         public async Task<ActionResult<List<SuperHero>>> UpdateHero(int id, SuperHero hero)
         {
-            var result = _superHeroService.UpdateHero(id, hero);
+            var result = await _superHeroService.UpdateHero(id, hero);
             if (result is null)
             {
                 return NotFound("Hero not found");
@@ -61,7 +61,7 @@ namespace Net7_WebAPI_Entity.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<SuperHero>>> DeleteHero(int id)
         {
-           var result = _superHeroService.DeleteHero(id);
+           var result = await _superHeroService.DeleteHero(id);
               if (result is null)
               {
                 return NotFound("Hero not found");
