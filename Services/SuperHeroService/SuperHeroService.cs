@@ -44,7 +44,7 @@ public class SuperHeroService : ISuperHeroService
         heroToUpdate.Occupation = hero.Occupation;
         heroToUpdate.PlaceOfResidence = hero.PlaceOfResidence;
         await _context.SaveChangesAsync();
-        return _context.SuperHeroes.ToList();
+        return await _context.SuperHeroes.ToListAsync();
     }
 
     public async Task<List<SuperHero>?> DeleteHero(int id)
