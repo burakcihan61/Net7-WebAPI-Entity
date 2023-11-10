@@ -5,6 +5,7 @@
 #### Repository Pattern
 #### Dependency Injection
 #### SQL Server
+#### Loggers
 
 
 ## **Commit-lint Types and Messages**
