@@ -14,9 +14,12 @@ namespace Net7_WebAPI_Entity.Controllers
     public class SuperHeroController : ControllerBase
     {
         private readonly ISuperHeroService _superHeroService;
-        public SuperHeroController(ISuperHeroService superHeroService)
+        private readonly ILogger<SuperHeroController> _logger;
+       
+        public SuperHeroController(ISuperHeroService superHeroService,ILogger<SuperHeroController> logger)
         {
             _superHeroService = superHeroService;
+            _logger = logger;
         }
         // GET: api/SuperHero
         [HttpGet]
@@ -24,6 +27,7 @@ namespace Net7_WebAPI_Entity.Controllers
         {
             
             var result = await _superHeroService.GetAllHeroes();
+            _logger.LogInformation("GetAllHeroes called");
             return Ok(result);
 
         }
@@ -37,6 +41,7 @@ namespace Net7_WebAPI_Entity.Controllers
             {
                 return NotFound("Hero not found");
             }
+            _logger.LogInformation("GetHeroById called");
             return Ok(result);
         }
         // POST: api/SuperHero
