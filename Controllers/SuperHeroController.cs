@@ -60,6 +60,7 @@ namespace Net7_WebAPI_Entity.Controllers
             {
                 return NotFound("Hero not found");
             }
+            _logger.LogInformation("UpdateHero called");
             return Ok(result);
         }
         // DELETE: api/SuperHero/{id}
