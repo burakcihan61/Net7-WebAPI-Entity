@@ -1,5 +1,4 @@
-﻿
-namespace Net7_WebAPI_Entity.Services.SuperHeroService;
+﻿namespace Net7_WebAPI_Entity.Services.SuperHeroService;
 
 public interface ISuperHeroService
 {
@@ -7,5 +6,5 @@ public interface ISuperHeroService
     Task<SuperHero?> GetHeroById(int id);
     Task<List<SuperHero>?> AddHero(SuperHero hero);
     Task<List<SuperHero>?> UpdateHero(int id, SuperHero hero);
-    Task<List<SuperHero>?> DeleteHero(int id); 
+    Task<List<SuperHero>?> DeleteHero(int id);
 }
