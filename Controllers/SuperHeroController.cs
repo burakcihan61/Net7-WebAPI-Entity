@@ -15,6 +15,7 @@ namespace Net7_WebAPI_Entity.Controllers
     {
         private readonly ISuperHeroService _superHeroService;
         private readonly ILogger<SuperHeroController> _logger;
+        
 
         public SuperHeroController(
             ISuperHeroService superHeroService,
