@@ -26,7 +26,7 @@ namespace Net7_WebAPI_Entity.Controllers
         public async Task<ActionResult<List<Book>>> GetAllBooks()
         {
             var result = await _bookService.GetAllBooks();
-            _logger.LogInformation("GetAllBooks called");
+            _logger.LogInformation("GetAllBooks called successfully");
             return Ok(result);
         }
     }
